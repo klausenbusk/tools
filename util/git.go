@@ -2,6 +2,7 @@ package util
 
 import (
 	"context"
+	"fmt"
 	"os/exec"
 	"strings"
 )
@@ -30,7 +31,7 @@ func FileExistsInGit(ctx context.Context, gitpath string, filepath string) bool 
 }
 
 func FileIgnoredByGit(ctx context.Context, gitpath string, filepath string) bool {
-	args := []string{"check-ignore", "--quiet", "--no-index", strings.TrimLeft(filepath, gitpath)}
+	args := []string{"check-ignore", "--quiet", "--no-index", fmt.Sprintf("%s/", strings.TrimLeft(filepath, gitpath))}
 
 	cmd := exec.Command("git", args...)
 	cmd.Dir = gitpath
