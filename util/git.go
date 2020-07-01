@@ -25,13 +25,5 @@ func FileExistsInGit(ctx context.Context, gitpath string, filepath string) bool 
 	if err := cmd.Run(); err != nil {
 		return false
 	}
-	//output, err := cmd.CombinedOutput()
-	//var exitError *exec.ExitError
-	//if err != nil {
-	//	if errors.As(err, &exitError) && exitError.ExitCode() == 1 {
-	//		return false
-	//	}
-	//	CheckCmd(output, err)
-	//}
 	return true
 }
