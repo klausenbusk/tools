@@ -28,7 +28,7 @@ func init() {
 var (
 	basePath     = util.GetBotBasePath()
 	packagesPath = path.Join(basePath, "packages", "packages")
-	cdnjsPath    = path.Join(basePath, "cdnjs")
+	cdnjsPath    = util.GetCDNJSPath()
 
 	// initialize standard debug logger
 	logger = util.GetStandardLogger()

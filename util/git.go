@@ -14,3 +14,24 @@ func UpdateGitRepo(ctx context.Context, gitpath string) {
 	Debugf(ctx, "%s: run %s\n", gitpath, cmd)
 	CheckCmd(cmd.CombinedOutput())
 }
+
+func FileExistsInGit(ctx context.Context, gitpath string, filepath string) bool {
+	args := []string{"ls-files", "--error-unmatch", filepath}
+
+	cmd := exec.Command("git", args...)
+	cmd.Dir = gitpath
+	Debugf(ctx, "%s: run %s\n", gitpath, cmd)
+
+	if err := cmd.Run(); err != nil {
+		return false
+	}
+	//output, err := cmd.CombinedOutput()
+	//var exitError *exec.ExitError
+	//if err != nil {
+	//	if errors.As(err, &exitError) && exitError.ExitCode() == 1 {
+	//		return false
+	//	}
+	//	CheckCmd(output, err)
+	//}
+	return true
+}

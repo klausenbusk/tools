@@ -78,7 +78,7 @@ func doUpdateNpm(ctx context.Context, pckg *packages.Package, versions []npm.Ver
 	for _, version := range versions {
 		pckgpath := path.Join(pckg.Path(), version.Version)
 
-		if _, err := os.Stat(pckgpath); !os.IsNotExist(err) {
+		if _, err := os.Stat(pckgpath); !os.IsNotExist(err) || util.FileExistsInGit(ctx, util.GetCDNJSPath(), pckgpath)  {
 			util.Debugf(ctx, "%s already exists; aborting", pckgpath)
 			continue
 		}
