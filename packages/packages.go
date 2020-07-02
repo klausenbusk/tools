@@ -106,7 +106,7 @@ func (p *Package) CalculateVersionSRIs(version string) map[string]string {
 			absFile := path.Join(p.Path(), version, relFile)
 			// HACK
 			cmd := exec.Command("git", "-C", util.GetCDNJSPath(), "sparse-checkout", "add", strings.TrimLeft(absFile, fmt.Sprintf("%s/", util.GetCDNJSPath())))
-			cmd.Run()
+			_ = cmd.Run()
 			sriFileMap[relFile] = sri.CalculateFileSRI(absFile)
 		}
 	}
