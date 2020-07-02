@@ -76,7 +76,8 @@ func GitAdd(ctx context.Context, gitpath, relpath string) {
 
 // GitCommit makes a new commit.
 func GitCommit(ctx context.Context, gitpath, msg string) {
-	args := []string{"commit", "-m", msg}
+	// HACK
+	args := []string{"commit", "--allow-empty", "-m", msg}
 
 	cmd := exec.Command("git", args...)
 	cmd.Dir = gitpath
