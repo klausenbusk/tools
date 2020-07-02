@@ -18,13 +18,13 @@ func UpdateGitRepo(ctx context.Context, gitpath string) {
 }
 
 func FileExistsInGit(ctx context.Context, gitpath string, filepath string) bool {
-	args := []string{"ls-tree", "HEAD", filepath}
+	args := []string{"ls-files", "--error-unmatch", filepath}
 
 	cmd := exec.Command("git", args...)
 	cmd.Dir = gitpath
 	Debugf(ctx, "%s: run %s\n", gitpath, cmd)
 
-	if out, err := cmd.Output(); err != nil || len(out) == 0 {
+	if err := cmd.Run(); err != nil {
 		return false
 	}
 	return true
